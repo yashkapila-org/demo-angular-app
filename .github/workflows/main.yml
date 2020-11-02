@@ -43,23 +43,29 @@ jobs:
       run: npm install
 
     - name: Create Angular App build
-      run: npm run build
+      run: npm start
 
-    - name: Deploy Angular App
-      uses: netlify/actions/cli@master
-      env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      with:
-        args: deploy --dir=dist/demo-angular-app --prod
+    # - name: Deploy Angular App
+    #   uses: netlify/actions/cli@master
+    #   env:
+    #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    #   with:
+    #     args: deploy --dir=dist/demo-angular-app --prod
 
     # TODO: move them to a sequential job?
-    - name: Checkout E2E repo
-      uses: actions/checkout@v2
-      with:
-        repository: yash-kapila/demo-angular-app-e2e
-        path: e2e-tests
+    # - name: Checkout E2E repo
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: yash-kapila/demo-angular-app-e2e
+    #     path: e2e-tests
 
-    - name: Install E2E Dependencies
-      working-directory: e2e-tests
-      run: npm install
+    # - name: Install E2E Dependencies
+    #   working-directory: e2e-tests
+    #   run: npm install
+
+    # - name: Execute E2E Tests
+    #   uses: cypress-io/github-action@v2
+    #   with:
+    #     browser: chrome
+    #     env: host=api.dev.local,port=4222
