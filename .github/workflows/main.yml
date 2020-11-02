@@ -25,6 +25,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: yash-kapila/demo-angular-app-e2e
+        path: e2e-tests
 
     - name: Cache node modules
       uses: actions/cache@v2
