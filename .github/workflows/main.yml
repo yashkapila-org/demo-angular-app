@@ -20,13 +20,6 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    # Checkout e2e repo
-    - name: Checkout E2E repo
-      uses: actions/checkout@v2
-      with:
-        repository: yash-kapila/demo-angular-app-e2e
-        path: e2e-tests
-
     - name: Cache node modules
       uses: actions/cache@v2
       env:
@@ -46,16 +39,27 @@ jobs:
         node-version: 12.x
 
     # Runs a set of commands using the runners shell
-    - name: Install Dependencies
+    - name: Install Angular App Dependencies
       run: npm install
 
-    - name: Create build
+    - name: Create Angular App build
       run: npm run build
 
-    - name: Deploy app
+    - name: Deploy Angular App
       uses: netlify/actions/cli@master
       env:
         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       with:
         args: deploy --dir=dist/demo-angular-app --prod
+
+    # TODO: move them to a sequential job?
+    - name: Checkout E2E repo
+      uses: actions/checkout@v2
+      with:
+        repository: yash-kapila/demo-angular-app-e2e
+        path: e2e-tests
+
+    - name: Install E2E Dependencies
+      working-directory: e2e-tests
+      run: npm install
