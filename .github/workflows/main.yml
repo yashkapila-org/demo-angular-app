@@ -70,5 +70,5 @@ jobs:
       with:
         working-directory: e2e-tests
         browser: chrome
-        config: baseUrl=${{steps.deploy_app.outputs.deploy-url}}
+        config: baseUrl=https://mystifying-curie-b42441.netlify.app
         # env: host=${{steps.deploy_app.outputs.deploy-url}}
