@@ -71,4 +71,11 @@ jobs:
         working-directory: e2e-tests
         browser: chrome
         config: baseUrl=https://mystifying-curie-b42441.netlify.app
-        # env: host=${{steps.deploy_app.outputs.deploy-url}}
+
+    # Test run video was always captured, so this action uses "always()" condition
+    - name: Execute E2E Tests
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: cypress-videos
+        path: cypress/videos
