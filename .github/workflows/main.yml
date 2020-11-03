@@ -1,71 +1,30 @@
-# This is a basic workflow to help you get started with Actions
 name: Demo Angular App
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
     name: Build app
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Cache node modules
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-
-    # Runs a single command using the runners shell
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
 
-    # Runs a set of commands using the runners shell
-    # - name: Install Angular App Dependencies
-    #   run: npm install
-
-    # - name: Create Angular App build
-    #   run: npm run build
-
-    # - name: Deploy Angular App
-    #   id: deploy_app
-    #   uses: netlify/actions/cli@master
-    #   env:
-    #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-    #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-    #   with:
-    #     args: deploy --dir=dist/demo-angular-app --prod
-
-    # TODO: move them to a sequential job?
     - name: Checkout E2E repo
       uses: actions/checkout@v2
       with:
         repository: yash-kapila/demo-angular-app-e2e
         path: e2e-tests
 
-    # - name: Install E2E Dependencies
-    #   working-directory: e2e-tests
-    #   run: npm install
-
-    - name: Install root dependencies
+    - name: Install Angular project dependencies
       uses: bahmutov/npm-install@v1
 
     - name: Start server in the background
