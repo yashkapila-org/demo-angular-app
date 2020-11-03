@@ -39,7 +39,6 @@ jobs:
     # Capture screenshots for failing tests
     - name: Capture screenshots artifacts
       uses: actions/upload-artifact@v2
-      if: failure()
       with:
         name: cypress-screenshots
         path: e2e-tests/cypress/screenshots
