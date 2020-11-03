@@ -11,6 +11,7 @@
         type="text"
         class="form-control"
         id="transferForm_fromAccount"
+        data-test-hook="fromAccountInput"
         formControlName="fromAccount"
         [ngClass]="{
           'is-invalid': fcFromAccount.invalid && (fcFromAccount.dirty || fcFromAccount.touched)
@@ -24,11 +25,12 @@
       <input type="text"
         class="form-control"
         id="transferForm_toAccount"
+        data-test-hook="toAccountInput"
         formControlName="toAccount"
         [ngClass]="{
           'is-invalid': fcToAccount.invalid && (fcToAccount.dirty || fcToAccount.touched)
         }">
-      <div class="invalid-feedback" *ngIf="fcToAccount.errors && (fcToAccount.dirty || fcToAccount.touched)">
+      <div class="invalid-feedback" data-test-hook="toAccountFieldValidationContainer" *ngIf="fcToAccount.errors && (fcToAccount.dirty || fcToAccount.touched)">
         {{ 'validation.error.' + getFirstError(fcToAccount) | translate }}
       </div>
     </div>
@@ -36,18 +38,19 @@
       <label for="transferForm_amount">{{ 'transferForm.amount' | translate }}</label>
       <input type="text"
         class="form-control"
+        data-test-hook="amountInput"
         id="transferForm_amount"
         formControlName="amount"
         [ngClass]="{
           'is-invalid': fcAmount.invalid && (fcAmount.dirty || fcAmount.touched)
         }">
-      <div class="invalid-feedback" *ngIf="fcAmount.errors && (fcAmount.dirty || fcAmount.touched)">
+      <div class="invalid-feedback" data-test-hook="amountFieldValidationContainer" *ngIf="fcAmount.errors && (fcAmount.dirty || fcAmount.touched)">
         {{ 'validation.error.' + getFirstError(fcAmount) | translate }}
       </div>
     </div>
     <div *ngIf="isError">{{ 'transferForm.genericError' | translate }}</div>
     <div class="bb-form-buttons">
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary" data-test-hook="transferFormSubmitBtn">
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"></span>
         {{ 'transferForm.submit' | translate }}
       </button>

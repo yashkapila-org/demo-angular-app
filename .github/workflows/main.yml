@@ -24,26 +24,29 @@ jobs:
         repository: yash-kapila/demo-angular-app-e2e
         path: e2e-tests
 
+    # Install Angular project dependencies
     - name: Install Angular project dependencies
       uses: bahmutov/npm-install@v1
 
+    # Spawn Angular dev server(port 4200)
     - name: Start server in the background
       run: npm start &
 
+    # Execute E2E Tests
     - name: Execute E2E Tests
       uses: cypress-io/github-action@v2
       with:
         working-directory: e2e-tests
         browser: chrome
 
-    # Capture screenshots for failing tests
+    # Capture screenshots as artifacts
     - name: Capture screenshots artifacts
       uses: actions/upload-artifact@v2
       with:
         name: cypress-screenshots
         path: e2e-tests/cypress/screenshots
 
-    # Test run video was always captured, so this action uses "always()" condition
+    # Capture videos as artifacts
     - name: Capture video artifacts
       uses: actions/upload-artifact@v2
       if: always()
