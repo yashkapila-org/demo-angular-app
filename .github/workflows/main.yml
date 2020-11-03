@@ -39,14 +39,15 @@ jobs:
     # Capture screenshots for failing tests
     - name: Capture screenshots artifacts
       uses: actions/upload-artifact@v2
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+      if: failure()
+      with:
+        name: cypress-screenshots
+        path: e2e-tests/cypress/screenshots
 
     # Test run video was always captured, so this action uses "always()" condition
     - name: Capture video artifacts
       uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: cypress-videos
-          path: e2e-tests/cypress/videos
+      if: always()
+      with:
+        name: cypress-videos
+        path: e2e-tests/cypress/videos
