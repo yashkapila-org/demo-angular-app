@@ -39,20 +39,20 @@ jobs:
         node-version: 12.x
 
     # Runs a set of commands using the runners shell
-    - name: Install Angular App Dependencies
-      run: npm install
+    # - name: Install Angular App Dependencies
+    #   run: npm install
 
-    - name: Create Angular App build
-      run: npm run build
+    # - name: Create Angular App build
+    #   run: npm run build
 
-    - name: Deploy Angular App
-      id: deploy_app
-      uses: netlify/actions/cli@master
-      env:
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      with:
-        args: deploy --dir=dist/demo-angular-app --prod
+    # - name: Deploy Angular App
+    #   id: deploy_app
+    #   uses: netlify/actions/cli@master
+    #   env:
+    #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+    #   with:
+    #     args: deploy --dir=dist/demo-angular-app --prod
 
     # TODO: move them to a sequential job?
     - name: Checkout E2E repo
@@ -61,16 +61,22 @@ jobs:
         repository: yash-kapila/demo-angular-app-e2e
         path: e2e-tests
 
-    - name: Install E2E Dependencies
-      working-directory: e2e-tests
-      run: npm install
+    # - name: Install E2E Dependencies
+    #   working-directory: e2e-tests
+    #   run: npm install
+
+    - name: Install root dependencies
+      uses: bahmutov/npm-install@v1
+
+    - name: Start server in the background
+      run: npm start &
 
     - name: Execute E2E Tests
       uses: cypress-io/github-action@v2
       with:
         working-directory: e2e-tests
         browser: chrome
-        config: baseUrl=https://mystifying-curie-b42441.netlify.app
+        config: baseUrl=http://localhost:4200
 
     # Test run video was always captured, so this action uses "always()" condition
     - name: Execute E2E Tests
