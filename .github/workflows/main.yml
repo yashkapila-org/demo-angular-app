@@ -36,14 +36,16 @@ jobs:
         working-directory: e2e-tests
         browser: chrome
 
-    # Test run video was always captured, so this action uses "always()" condition
-    - name: Execute E2E Tests
+    # Always capture screenshots
+    - name: Capture screenshots artifacts
       uses: actions/upload-artifact@v2
         if: always()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
 
+    # Test run video was always captured, so this action uses "always()" condition
+    - name: Capture video artifacts
       uses: actions/upload-artifact@v2
         if: always()
         with:
