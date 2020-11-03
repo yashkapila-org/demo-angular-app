@@ -39,9 +39,10 @@ jobs:
     # Test run video was always captured, so this action uses "always()" condition
     - name: Execute E2E Tests
       uses: actions/upload-artifact@v2
-      with:
-        name: cypress-screenshots
-        path: cypress/screenshots
+        if: always()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
 
       uses: actions/upload-artifact@v2
         if: always()
