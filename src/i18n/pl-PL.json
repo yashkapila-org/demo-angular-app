@@ -1,0 +1,14 @@
+{
+  "transferForm.amount": "Kwota",
+  "transferForm.back": "Powrót",
+  "transferForm.confirm": "Potwierdź",
+  "transferForm.fromAccount": "Z konta",
+  "transferForm.genericError": "Coś poszło nie tak. Spróbuj ponownie później.",
+  "transferForm.submit": "Wyślij",
+  "transferForm.toAccount": "Na konto",
+  "validation.error.amountTooHigh": "Niewystarczające środki na koncie",
+  "validation.error.amountTooLow": "Wartość zbyt niska",
+  "validation.error.iban": "Wpisz poprawny IBAN",
+  "validation.error.invalid": "Nieprawidłowa wartość",
+  "validation.error.required": "Pole wymagane"
+}

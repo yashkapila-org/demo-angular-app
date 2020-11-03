@@ -1,0 +1,80 @@
+<div *ngIf="currentState === 'FORM'">
+  <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="transferForm_fromAccount">{{ 'transferForm.fromAccount' | translate }}</label>
+      <input *ngIf="isLoadingAccounts"
+        type="text"
+        class="form-control"
+        value="Loading accounts..."
+        disabled>
+      <input *ngIf="!isLoadingAccounts"
+        type="text"
+        class="form-control"
+        id="transferForm_fromAccount"
+        formControlName="fromAccount"
+        [ngClass]="{
+          'is-invalid': fcFromAccount.invalid && (fcFromAccount.dirty || fcFromAccount.touched)
+        }">
+      <div class="invalid-feedback" *ngIf="fcFromAccount.errors && (fcFromAccount.dirty || fcFromAccount.touched)">
+        {{ 'validation.error.' + getFirstError(fcFromAccount) | translate }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="transferForm_toAccount">{{ 'transferForm.toAccount' | translate }}</label>
+      <input type="text"
+        class="form-control"
+        id="transferForm_toAccount"
+        formControlName="toAccount"
+        [ngClass]="{
+          'is-invalid': fcToAccount.invalid && (fcToAccount.dirty || fcToAccount.touched)
+        }">
+      <div class="invalid-feedback" *ngIf="fcToAccount.errors && (fcToAccount.dirty || fcToAccount.touched)">
+        {{ 'validation.error.' + getFirstError(fcToAccount) | translate }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="transferForm_amount">{{ 'transferForm.amount' | translate }}</label>
+      <input type="text"
+        class="form-control"
+        id="transferForm_amount"
+        formControlName="amount"
+        [ngClass]="{
+          'is-invalid': fcAmount.invalid && (fcAmount.dirty || fcAmount.touched)
+        }">
+      <div class="invalid-feedback" *ngIf="fcAmount.errors && (fcAmount.dirty || fcAmount.touched)">
+        {{ 'validation.error.' + getFirstError(fcAmount) | translate }}
+      </div>
+    </div>
+    <div *ngIf="isError">{{ 'transferForm.genericError' | translate }}</div>
+    <div class="bb-form-buttons">
+      <button type="submit" class="btn btn-primary">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+        {{ 'transferForm.submit' | translate }}
+      </button>
+    </div>
+  </form>  
+</div>
+<div *ngIf="currentState === 'CONFIRMATION'">
+  <div>
+    <div>{{ 'transferForm.fromAccount' | translate }}:</div>
+    <strong>{{ confirmationSummary.fromAccount }}</strong>
+  </div>
+  <div>
+    <div>{{ 'transferForm.toAccount' | translate }}:</div>
+    <strong>{{ confirmationSummary.toAccount }}</strong>
+  </div>
+  <div>
+    <div>{{ 'transferForm.amount' | translate }}:</div>
+    <strong>{{ confirmationSummary.amount }} {{ confirmationSummary.currency }}</strong>
+  </div>
+  <div *ngIf="isError">{{ 'transferForm.genericError' | translate }}</div>
+  <div class="bb-form-buttons">
+    <button (click)="onConfirm()" type="button" class="btn btn-primary">
+      <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"></span>
+      {{ 'transferForm.confirm' | translate }}
+    </button>
+    <button (click)="onBack()" type="button" class="btn btn-secondary">
+      {{ 'transferForm.back' | translate }}
+    </button>
+  </div>
+</div>

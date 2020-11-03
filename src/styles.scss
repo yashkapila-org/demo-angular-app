@@ -1,1 +1,157 @@
-/* You can add global styles to this file, and also import other style files */
+$bb-color-primary: #ee7033;
+$bb-color-secondary: #cccccc;
+$bb-color-error: #dc3545;
+
+// Bootstrap config
+$theme-colors: (
+  'primary': $bb-color-primary,
+  'secondary': #cccccc
+);
+$border-radius: 0;
+
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/utilities/_text';
+@import '~bootstrap/scss/_buttons';
+@import '~bootstrap/scss/_button-group';
+@import '~bootstrap/scss/_spinners';
+@import '~bootstrap/scss/_forms';
+
+body { 
+  background: url(assets/background.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+// BOOTSTRAP OVERRIDES
+.form-control {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+
+  &:focus {
+    -webkit-box-shadow: 0 2px 0 0 $bb-color-primary;
+    -moz-box-shadow: 0 2px 0 0 $bb-color-primary;
+    box-shadow: 0 2px 0 0 $bb-color-primary;
+  }
+  
+  &.is-invalid:focus {
+    -webkit-box-shadow: 0 2px 0 0 $bb-color-error;
+    -moz-box-shadow: 0 2px 0 0 $bb-color-error;
+    box-shadow: 0 2px 0 0 $bb-color-error;
+  }
+}
+
+// BB-NAVBAR
+.bb-navbar {
+  background: #ffffff;
+  padding: 10px 0;
+  border-bottom: 2px solid $bb-color-primary;
+  margin-bottom: 70px;
+
+  &__logo {
+    max-width: 100%;
+  }
+}
+
+// BB-PANEL
+.bb-panel {
+  background: #ffffff;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 3px 10px 0px rgba(0,0,0,0.15);
+
+  &__header {
+    position: relative;
+    color: #ffffff;
+    background: #0c8397;
+    padding: 10px;
+    text-align: center;
+
+    &__icon {
+      position: absolute;
+      left: 20px;
+      opacity: 0.4;
+    }
+  }
+
+  &__body {
+    padding: 20px;
+  }
+}
+
+.bb-panel--large {
+  .bb-panel__header {
+    padding: 16px;
+  }
+}
+
+// BB-TABLE
+.bb-table {
+  width: 100%;
+  border: 2px solid #cccccc;
+
+  tr {
+    border: 2px solid #cccccc;
+  }
+
+  td {
+    padding: 8px 12px;
+    position: relative;
+  }
+
+  td:first-of-type {
+    padding-left: 22px; // space for the color strip
+  }
+
+  &__color-strip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 100%;
+  }
+
+  // Icons should be prepared in the right size and color
+  &__icon {
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+  }
+}
+
+.bb-table-spinner {
+  height: 14px;
+  text-align: center;
+
+  & > * {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// BB-SORT-ICON
+.bb-sort-icon {
+  display: inline-block;
+  background: url(assets/icons/arrow.svg) no-repeat top left;
+  background-size: 10px 10px;
+  width: 10px;
+  height: 10px;
+
+  &--descending {
+    transform: rotate(180deg);
+  }
+}
+
+// BB-FORM-buttons
+.bb-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  margin-top: 10px;
+}

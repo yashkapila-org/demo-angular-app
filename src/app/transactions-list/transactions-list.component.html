@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-6">
+    <input type="text"
+      class="form-control"
+      id="transactions_searchPhrase"
+      [formControl]="fcSearchPhrase"
+      placeholder="Search by typing...">
+  </div>
+  <div class="col-md-6 text-right">
+    Sort by:
+    <div class="btn-group" role="group">
+      <button (click)="setSortBy('date')"
+        type="button"
+        class="btn btn-outline-dark">
+        <span *ngIf="sortBy === 'date'"
+          [ngClass]="{ 'bb-sort-icon--descending': !isAscending }"
+          class="bb-sort-icon"></span>
+        Date
+      </button>
+      <button (click)="setSortBy('beneficiary')"
+        type="button"
+        class="btn btn-outline-dark">
+        <span *ngIf="sortBy === 'beneficiary'"
+          [ngClass]="{ 'bb-sort-icon--descending': !isAscending }"
+          class="bb-sort-icon"></span>
+        Beneficiary
+      </button>
+      <button (click)="setSortBy('amount')"
+        type="button"
+        class="btn btn-outline-dark">
+        <span *ngIf="sortBy === 'amount'"
+          [ngClass]="{ 'bb-sort-icon--descending': !isAscending }"
+          class="bb-sort-icon"></span>
+        Amount
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="bb-table-spinner">
+  <div class="spinner-border" role="status" *ngIf="isLoading"></div>
+</div>
+<table class="bb-table">
+  <tr *ngFor="let transaction of transactions">
+    <td>
+      <div class="bb-table__color-strip" [ngStyle]="{ background: transaction.categoryCode }"></div>
+      {{ transaction.date | date:'LLL. d' }}
+    </td>
+    <td>
+      <img *ngIf="transaction.merchantIconSrc" [src]="transaction.merchantIconSrc" class="bb-table__icon">
+      <div *ngIf="!transaction.merchantIconSrc" class="bb-table__icon"></div>
+    </td>
+    <td>
+      <div>{{ transaction.merchantName }}</div>
+      {{ transaction.transactionType }}
+    </td>
+    <td class="text-right">{{ transaction.amount.toFixed(2) }} {{ transaction.currency }}</td>
+  </tr>
+</table>
