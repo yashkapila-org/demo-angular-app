@@ -47,9 +47,17 @@ jobs:
         path: e2e-tests/cypress/screenshots
 
     # Capture videos as artifacts
-    # - name: Capture video artifacts
-    #   uses: actions/upload-artifact@v2
-    #   if: always()
-    #   with:
-    #     name: cypress-videos
-    #     path: e2e-tests/cypress/videos
+    - name: Capture video artifacts
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: cypress-videos
+        path: e2e-tests/cypress/videos
+
+    # Capture Mocha test report as artifacts
+    - name: Capture Mocha test report artifacts
+      uses: actions/upload-artifact@v2
+      if: always()
+      with:
+        name: cypress-videos
+        path: e2e-tests/mochawesome-reporter/report.html
