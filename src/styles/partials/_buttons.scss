@@ -1,0 +1,10 @@
+.btn {
+  &.btn-primary {
+    background-color: #EC6F31;
+    border-color: darken(#EC6F31, 10%)
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

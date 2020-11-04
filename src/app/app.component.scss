@@ -1,0 +1,22 @@
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .header-wrap {
+    height: 80px;
+  }
+
+  .content-wrap {
+    height: calc(100vh - 80px);
+  }
+
+  .footer-wrap {
+    background-color: #fff;
+    height: 40px;
+    position: fixed;
+    bottom: 0;
+  }
+}
+

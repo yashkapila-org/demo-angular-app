@@ -1,0 +1,49 @@
+<section class="make-transfer box-style">
+  <header class="d-flex">
+    <i class="lni lni-credit-cards"></i>
+    <h5>Make <strong>Transfer</strong></h5>
+  </header>
+
+  <section>
+    <form [formGroup]="transferForm">
+      <div>
+        <div class="form-group">
+          <label for="fromAccount">From Account</label>
+          <input formControlName="fromAccount" type="email" class="form-control" id="fromAccount"
+            aria-describedby="From Account" placeholder="" data-test-hook="fromAccountInput">
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error': !amount.valid && amount.touched}">
+          <label for="toAccount">To Account<span class="required-validator">&nbsp;*</span></label>
+          <input formControlName="toAccount" type="email" class="form-control" id="toAccount"
+            aria-describedby="To Account" placeholder="type an account name" data-test-hook="toAccountInput">
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error': !amount.valid && amount.touched}">
+          <label for="amount">Amount<span class="required-validator">&nbsp;*</span></label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">€</div>
+            </div>
+            <input formControlName="amount" type="text" class="form-control" id="amount" aria-describedby="Amount"
+              placeholder="specify the amount" data-test-hook="amountInput">
+          </div>
+        </div>
+
+        <div data-test-hook="amountFieldValidationContainer">
+          <p class="form-feedback-invalid mb-0" [hidden]="!amount.errors?.notANumber">
+            You can only specify a number as amount.
+          </p>
+
+          <p class="form-feedback-invalid mb-0" [hidden]="!amount.errors?.lowBalance">
+            There is not enough balance.
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group m-0 text-right mt-2">
+        <app-submit-button (submitForm)="submitForm($event)"></app-submit-button>
+      </div>
+    </form>
+  </section>
+</section>

@@ -1,0 +1,34 @@
+$error-color: #dc3545;
+
+.form-feedback-invalid {
+  width: 100%;
+  margin-top: $small-spacing;
+  font-size: 80%;
+  color: $error-color;
+}
+
+.form-group.has-error {
+  color: $error-color;
+
+  .required-validator {
+    display: inline-block;
+  }
+}
+
+input::placeholder {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+input.ng-touched.ng-invalid {
+  border-color: $error-color;
+}
+
+.required-validator {
+  display: none;
+  font-size: 0.8rem;
+}
+
+input.form-control, .input-group-text {
+  font-size: 0.9rem;
+}

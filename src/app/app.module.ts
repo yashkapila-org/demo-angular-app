@@ -1,54 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { Observable, of } from 'rxjs';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-// In a larger applications translations would be loaded dynamically.
-// This app doesn't use http.
-import translationEnUS from '../i18n/en-US.json';
-import translationPlPL from '../i18n/pl-PL.json';
-
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { transactionsReducer } from './transactions.reducer';
-import { TransactionsEffects } from './transactions.effects';
-
-import { TransactionsListComponent } from './transactions-list/transactions-list.component';
-import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { AppComponent } from './app.component';
+import { LogoComponent } from './bb-ui/components/logo/logo.component';
+import { FooterComponent } from './bb-ui/components/footer/footer.component';
+import { ContentComponent } from './components/content/content.component';
+import { HeaderComponent } from './components/header/header.component';
+import { TransferComponent } from './components/transfer/transfer.component';
+import { TransfersListComponent } from './components/transfers-list/transfers-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SubmitButtonComponent } from './bb-ui/components/submit-button/submit-button.component';
+
+import { TransfersService } from './services/transfers.service';
 
 @NgModule({
   declarations: [
-    TransactionsListComponent,
-    TransferFormComponent,
-    AppComponent
+    AppComponent,
+    LogoComponent,
+    FooterComponent,
+    ContentComponent,
+    HeaderComponent,
+    TransferComponent,
+    TransfersListComponent,
+    SubmitButtonComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'en-US',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: () => ({
-          getTranslation: (lang: string): Observable<any> => {
-            return of({
-              'en-US': translationEnUS,
-              'pl-PL': translationPlPL
-            }[lang]);
-          }
-        })
-      }
-  }),
-    StoreModule.forRoot({
-      transactions: transactionsReducer
-    }),
-    EffectsModule.forRoot([
-      TransactionsEffects
-    ])
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [TransfersService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
