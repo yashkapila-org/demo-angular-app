@@ -60,4 +60,4 @@ jobs:
       if: always()
       with:
         name: cypress-videos
-        path: e2e-tests/mochawesome-reporter/report.html
+        path: e2e-tests/mochawesome-report/report.html
