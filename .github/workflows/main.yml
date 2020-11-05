@@ -9,22 +9,20 @@ jobs:
     name: Build app
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
+
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-
-    - name: Checkout E2E repo
+    - name: Checkout E2E Tests repo
       uses: actions/checkout@v2
       with:
-        repository: yash-kapila/demo-angular-app-e2e
+        repository: yash-kapila/demo-angular-app-e2e  # Temporary repo for e2e tests
         path: e2e-tests
 
-    # Install Angular project dependencies
     - name: Install Angular project dependencies
       uses: bahmutov/npm-install@v1
 
@@ -32,21 +30,18 @@ jobs:
     - name: Start server in the background
       run: npm start &
 
-    # Execute E2E Tests
     - name: Execute E2E Tests
       uses: cypress-io/github-action@v2
       with:
         working-directory: e2e-tests
         browser: chrome
 
-    # Capture screenshots as artifacts
     - name: Capture screenshots artifacts
       uses: actions/upload-artifact@v2
       with:
         name: cypress-screenshots
         path: e2e-tests/cypress/screenshots
 
-    # Capture videos as artifacts
     - name: Capture video artifacts
       uses: actions/upload-artifact@v2
       if: always()
@@ -54,7 +49,6 @@ jobs:
         name: cypress-videos
         path: e2e-tests/cypress/videos
 
-    # Capture Mocha test report as artifacts
     - name: Capture Mocha test report artifacts
       uses: actions/upload-artifact@v2
       if: always()
